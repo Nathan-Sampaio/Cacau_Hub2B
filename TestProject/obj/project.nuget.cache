@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "af/oxRQInMUJeuyJ6/cYkkaM/VQo/AKaLy45xWW6zJvdmwlNt3Ehav0YePkEwyBBY+wIwgJJbpl2meoPNqSM4g==",
+  "dgSpecHash": "DKjhuePt+j8mjqNLJmZYN8f0ClEpLxzBDkYOTTmVKibZffuRwsF39JflNwjWC7dKkCB3h0eP75qPUA1uACV/kQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\TestProject\\TestProject.csproj",
+  "projectFilePath": "C:\\Projetos\\Hub2b_CacauShow\\TestProject\\TestProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\allan\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\allan\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",

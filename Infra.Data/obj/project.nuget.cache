@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qNPci45U8dkQzZDTGWKPGxW8a2BpOqrrifEESo+T+cX6yF+DhEb/nBzm7EKrxJw8+jsAgWBOSiR5EhSZsHCvmQ==",
+  "dgSpecHash": "E6R9gXPNrH7IhbH84EJfX0XjqKGOx9VcSpKjoba6kTBeTqduhsTu7e5BgovgXecYrQGcaZFti0DTG5DGKYIujQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj",
+  "projectFilePath": "C:\\Projetos\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\allan\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "C:\\Users\\allan\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",

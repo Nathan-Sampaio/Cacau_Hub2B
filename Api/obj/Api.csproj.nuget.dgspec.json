@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Api\\Api.csproj": {}
+    "C:\\Projetos\\Hub2b_CacauShow\\Api\\Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Api\\Api.csproj": {
+    "C:\\Projetos\\Hub2b_CacauShow\\Api\\Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Api\\Api.csproj",
+        "projectUniqueName": "C:\\Projetos\\Hub2b_CacauShow\\Api\\Api.csproj",
         "projectName": "Api",
-        "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Api\\Api.csproj",
+        "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Api\\Api.csproj",
         "packagesPath": "C:\\Users\\allan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Api\\obj\\",
+        "outputPath": "C:\\Projetos\\Hub2b_CacauShow\\Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\allan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,17 +28,17 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj": {
-                "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj"
+              "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj": {
+                "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj"
               },
-              "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj": {
-                "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj"
+              "C:\\Projetos\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj": {
+                "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj"
               },
-              "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj": {
-                "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj"
+              "C:\\Projetos\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj": {
+                "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj"
               },
-              "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Servico\\Servico.csproj": {
-                "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Servico\\Servico.csproj"
+              "C:\\Projetos\\Hub2b_CacauShow\\Servico\\Servico.csproj": {
+                "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Servico\\Servico.csproj"
               }
             }
           }
@@ -80,14 +80,14 @@
         }
       }
     },
-    "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj": {
+    "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj",
+        "projectUniqueName": "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj",
         "projectName": "Dominio",
-        "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj",
+        "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj",
         "packagesPath": "C:\\Users\\allan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\obj\\",
+        "outputPath": "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\allan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -134,14 +134,14 @@
         }
       }
     },
-    "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj": {
+    "C:\\Projetos\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj",
+        "projectUniqueName": "C:\\Projetos\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj",
         "projectName": "Infra.Data",
-        "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj",
+        "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Infra.Data\\Infra.Data.csproj",
         "packagesPath": "C:\\Users\\allan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Infra.Data\\obj\\",
+        "outputPath": "C:\\Projetos\\Hub2b_CacauShow\\Infra.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\allan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -158,8 +158,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj": {
-                "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj"
+              "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj": {
+                "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj"
               }
             }
           }
@@ -206,14 +206,14 @@
         }
       }
     },
-    "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj": {
+    "C:\\Projetos\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj",
+        "projectUniqueName": "C:\\Projetos\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj",
         "projectName": "Repositorio",
-        "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj",
+        "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj",
         "packagesPath": "C:\\Users\\allan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Repositorio\\obj\\",
+        "outputPath": "C:\\Projetos\\Hub2b_CacauShow\\Repositorio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\allan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -230,8 +230,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj": {
-                "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj"
+              "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj": {
+                "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj"
               }
             }
           }
@@ -274,14 +274,14 @@
         }
       }
     },
-    "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Servico\\Servico.csproj": {
+    "C:\\Projetos\\Hub2b_CacauShow\\Servico\\Servico.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Servico\\Servico.csproj",
+        "projectUniqueName": "C:\\Projetos\\Hub2b_CacauShow\\Servico\\Servico.csproj",
         "projectName": "Servico",
-        "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Servico\\Servico.csproj",
+        "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Servico\\Servico.csproj",
         "packagesPath": "C:\\Users\\allan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Servico\\obj\\",
+        "outputPath": "C:\\Projetos\\Hub2b_CacauShow\\Servico\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\allan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -298,8 +298,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj": {
-                "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj"
+              "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj": {
+                "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj"
               }
             }
           }

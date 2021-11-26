@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DmboDZiGDCqWorLKIE7EhH1GlFprDVywYjlLLpRda9TIFpj7YCiyhpf1dJyKsLV+TPf092LH2/Ln/5ovyw2wQg==",
+  "dgSpecHash": "AmqsZcIlOFrRrb8qJv2gGXM9dWIp/vlj/P6zroazAzE7pGu2hHQhtY4X1dmQbu4lnAP3+t/v13MNRdCy0/cKHg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj",
+  "projectFilePath": "C:\\Projetos\\Hub2b_CacauShow\\Repositorio\\Repositorio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\allan\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\allan\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",

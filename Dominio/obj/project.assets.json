@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj",
+      "projectUniqueName": "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj",
       "projectName": "Dominio",
-      "projectPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\Dominio.csproj",
+      "projectPath": "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\Dominio.csproj",
       "packagesPath": "C:\\Users\\allan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\allan\\Downloads\\Hub2b_CacauShow\\Hub2b_CacauShow\\Dominio\\obj\\",
+      "outputPath": "C:\\Projetos\\Hub2b_CacauShow\\Dominio\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\allan\\AppData\\Roaming\\NuGet\\NuGet.Config",
