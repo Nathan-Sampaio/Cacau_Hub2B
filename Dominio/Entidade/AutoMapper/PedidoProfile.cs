@@ -15,6 +15,7 @@ namespace Dominio.Entidade.AutoMapper
             CreateMap<Customer, CustomerCS>();
             CreateMap<Shipping, DeliveryCS>();
             CreateMap<Pedido.Pedido, PedidoCS>();
+
         }
     }
 }
