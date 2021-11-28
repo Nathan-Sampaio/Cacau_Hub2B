@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Entidade.AutoMapper
 {
-    internal class CustomerToCustomerCSResolver : IValueResolver<Customer, CustomerCS, CustomerCS>
+    public class CustomerToCustomerCSResolver : IValueResolver<Customer, CustomerCS, CustomerCS>
 	{
 		public CustomerCS Resolve(Customer source, CustomerCS destination, CustomerCS member, ResolutionContext context)
 		{

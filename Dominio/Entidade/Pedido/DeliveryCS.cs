@@ -10,7 +10,7 @@ namespace Dominio.Entidade.Pedido
     {
         public string method { get; set; }
         public RecipientCS recipient { get; set; }
-        public Address address { get; set; }
+        public AddressCS address { get; set; }
         public DateTime expectedDate { get; set; }
     }
 }

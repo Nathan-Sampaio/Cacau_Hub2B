@@ -62,9 +62,40 @@ namespace Infra.Data.Services
             }
         }
 
-        public Task<string> RecuperarTokenAcessoOms()
+        public async Task<string> RecuperarTokenAcessoOms()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var tokenAcesso = await _redis.RecuperarChave(config.RedisTokenKey);
+
+                if (!String.IsNullOrEmpty(tokenAcesso))
+                    return tokenAcesso;
+
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage response = await client.PostAsync(
+                        config.BaseURL + config.LoginURL,
+                        new StringContent(JsonSerializer.Serialize(config.Autenticacao), Encoding.UTF8, "application/json"));
+
+                    response.EnsureSuccessStatusCode();
+                    string conteudo =
+                        response.Content.ReadAsStringAsync().Result;
+
+                    OAuthToken resultado = JsonSerializer.Deserialize<OAuthToken>(conteudo);
+
+                    await _redis.GravarChave(config.RedisTokenKey, resultado.access_token, resultado.expires_in);
+
+                    return resultado.access_token;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

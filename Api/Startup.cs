@@ -43,6 +43,7 @@ namespace Api
             //Settings
             services.Configure<HubConfig>(options => Configuration.GetSection("HubConfig").Bind(options));
             services.Configure<RedisConfig>(options => Configuration.GetSection("RedisConfig").Bind(options));
+            services.Configure<OmsConfig>(options => Configuration.GetSection("OMSConfig").Bind(options));
 
             //DI
             services.AddScoped<IRedisRepositorio, RedisRepositorio>();
