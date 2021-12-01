@@ -14,6 +14,6 @@ namespace Dominio.Entidade
         public float TotalAmountPlusShipping { get; set; }
         public float TotalDiscount { get; set; }
         public int Installments { get; set; }
-        public Address Address { get; set; }
+        public AddressHub Address { get; set; }
     }
 }

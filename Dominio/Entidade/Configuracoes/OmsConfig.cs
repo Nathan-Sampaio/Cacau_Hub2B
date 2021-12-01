@@ -10,6 +10,9 @@ namespace Dominio.Entidade.Configuracoes
     public class OmsConfig
     {
         public string RedisTokenKey { get; set; }
+        public string BaseUrl { get; set; }
+
+        public string LoginUrl { get; set; }
 
         public OmsAuthRequest Autenticacao { get; set; }
     }

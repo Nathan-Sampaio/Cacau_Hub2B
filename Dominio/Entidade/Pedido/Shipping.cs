@@ -13,6 +13,6 @@ namespace Dominio.Entidade
         public string Service { get; set; }
         public float Price { get; set; }
         public string ReceiverName { get; set; }
-        public Address Address { get; set; }
+        public AddressHub Address { get; set; }
     }
 }

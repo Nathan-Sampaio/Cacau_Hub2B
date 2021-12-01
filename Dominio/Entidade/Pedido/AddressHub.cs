@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Dominio.Entidade
 {
-    public class Address
+    public class AddressHub
     {
         public string Address { get; set; }
         public string Neighborhood { get; set; }

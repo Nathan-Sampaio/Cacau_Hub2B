@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Repositorio;
+using System.Threading.Tasks;
 
 namespace TestProject
 {
@@ -13,6 +14,7 @@ namespace TestProject
     {
         private readonly LoginService _loginService;
         private readonly HubConfig config;
+        private readonly OmsConfig Omsconfig;
         private readonly RedisConfig configRedis;
 
         public LoginServiceTest()
@@ -38,16 +40,38 @@ namespace TestProject
                 //"localhost:13919,password=senhadoredis"
             };
 
+            Omsconfig = new OmsConfig()
+            {
+                RedisTokenKey = "AccessTokenOms",
+                BaseUrl = "https://api.cacaudigital.xyz:8443/",
+                LoginUrl= "auth/v1/jwt/token/",
+                Autenticacao = new OmsAuthRequest()
+                {
+                    clientid = "nathan.system@cacaushow.com.br",
+                    clientsecret = "N@t$$89451340oliv",
+                    userName = "6045",
+                }
+            };
+
             var redis = Options.Create(configRedis);
             var hub = Options.Create(config);
+            var oms = Options.Create(Omsconfig);
 
-            _loginService = new LoginService(hub, new RedisRepositorio(redis));
+            _loginService = new LoginService(hub, new RedisRepositorio(redis), oms);
         }
 
         [TestMethod]
         public void Is_TokenHub_NotEmpty()
         {
             var token = _loginService.RecuperarTokenAcessoHub().Result;
+
+            Assert.IsNotNull(token);
+        }
+
+        [TestMethod]
+        public async Task EstaRetornandoTokenOMS()
+        {
+            var token = await _loginService.RecuperarTokenAcessoOms();
 
             Assert.IsNotNull(token);
         }

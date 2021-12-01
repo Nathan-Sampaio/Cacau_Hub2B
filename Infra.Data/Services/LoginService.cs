@@ -18,12 +18,15 @@ namespace Infra.Data.Services
     public class LoginService : ILoginService
     {
         private readonly HubConfig config;
+        private readonly OmsConfig _configOms;
         private readonly IRedisRepositorio _redis;
 
-        public LoginService(IOptions<HubConfig> configuration, IRedisRepositorio redis)
+        public LoginService(IOptions<HubConfig> configuration, IRedisRepositorio redis, 
+                            IOptions<OmsConfig> configOms)
         {
-            this.config = configuration.Value;
-            this._redis = redis;
+            config = configuration.Value;
+            _configOms = configOms.Value;
+            _redis = redis;
         }
 
         public async Task<string> RecuperarTokenAcessoHub()
@@ -66,7 +69,7 @@ namespace Infra.Data.Services
         {
             try
             {
-                var tokenAcesso = await _redis.RecuperarChave(config.RedisTokenKey);
+                var tokenAcesso = await _redis.RecuperarChave(_configOms.RedisTokenKey);
 
                 if (!String.IsNullOrEmpty(tokenAcesso))
                     return tokenAcesso;
@@ -77,19 +80,27 @@ namespace Infra.Data.Services
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    HttpResponseMessage response = await client.PostAsync(
-                        config.BaseURL + config.LoginURL,
-                        new StringContent(JsonSerializer.Serialize(config.Autenticacao), Encoding.UTF8, "application/json"));
+                    var postUrl = _configOms.BaseUrl + _configOms.LoginUrl;
+                    var requestContent = new StringContent(JsonSerializer.Serialize(_configOms.Autenticacao), Encoding.UTF8, "application/json");
+                    
+                    HttpResponseMessage response = await client.PostAsync(postUrl,requestContent);
 
                     response.EnsureSuccessStatusCode();
                     string conteudo =
-                        response.Content.ReadAsStringAsync().Result;
+                        await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                    OAuthToken resultado = JsonSerializer.Deserialize<OAuthToken>(conteudo);
+                    var settings = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                    };
 
-                    await _redis.GravarChave(config.RedisTokenKey, resultado.access_token, resultado.expires_in);
+                    OmsAuthResponse resultado = JsonSerializer.Deserialize<OmsAuthResponse>(conteudo, settings);
 
-                    return resultado.access_token;
+                    await _redis.GravarChave(_configOms.RedisTokenKey, 
+                        resultado.Token, 
+                        Convert.ToInt32(resultado.Expires.Subtract(DateTime.Now).TotalSeconds));
+
+                    return resultado.Token;
                 }
             }
             catch (Exception)

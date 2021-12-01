@@ -16,6 +16,7 @@ namespace TestProject
         private readonly ILoginService _loginService;
         private readonly HubConfig config;
         private readonly RedisConfig configRedis;
+        private readonly OmsConfig Omsconfig;
         private FiltroPedido filtroPedido;
 
         public PedidoServiceTest()
@@ -48,10 +49,24 @@ namespace TestProject
                 Client = "416.078.168-30",
             };
 
+            Omsconfig = new OmsConfig()
+            {
+                RedisTokenKey = "AccessTokenOms",
+                BaseUrl = "https://api.cacaudigital.xyz:8443/",
+                LoginUrl = "auth/v1/jwt/token/",
+                Autenticacao = new OmsAuthRequest()
+                {
+                    clientid = "UwSjZbV99eZN9sVXkvaIsow20AIciQ",
+                    clientsecret = "hKDpu93dvUTJMqO83IHk9nV9vSLtFJ",
+                    userName = "testes@2032g",
+                }
+            };
+
             var redis = Options.Create(configRedis);
             var hub = Options.Create(config);
+            var oms = Options.Create(Omsconfig);
 
-            _loginService = new LoginService(hub, new RedisRepositorio(redis));
+            _loginService = new LoginService(hub, new RedisRepositorio(redis), oms);
 
             _pedidoService = new PedidoService(hub, _loginService);
         }
