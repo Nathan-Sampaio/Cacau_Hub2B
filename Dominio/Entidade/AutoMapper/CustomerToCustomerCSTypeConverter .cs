@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Dominio.Entidade.AutoMapper
 {
-    public class CustomerToCustomerCSResolver : IValueResolver<Customer, CustomerCS, CustomerCS>
+    public class CustomerToCustomerCSTypeConverter : ITypeConverter<Customer, CustomerCS>
 	{
-		public CustomerCS Resolve(Customer source, CustomerCS destination, CustomerCS member, ResolutionContext context)
-		{
+        public CustomerCS Convert(Customer source, CustomerCS destination, ResolutionContext context)
+        {
 			return new CustomerCS()
 			{
 				document = source.DocumentNumber,

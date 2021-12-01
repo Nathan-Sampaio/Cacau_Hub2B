@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Dominio.Entidade.AutoMapper
 {
-    public class ShippingDeliverySolver : IValueResolver<Shipping, DeliveryCS, DeliveryCS>
+    public class ShippingToDeliveryTypeConverter : ITypeConverter<Shipping, DeliveryCS>
     {
-        public DeliveryCS Resolve(Shipping source, DeliveryCS destination, DeliveryCS member, ResolutionContext context)
+        public DeliveryCS Convert(Shipping source, DeliveryCS destination, ResolutionContext context)
         {
             return new DeliveryCS()
             {

@@ -9,4 +9,10 @@
     <PackageReference Include="AutoMapper" Version="10.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Entidade\AutoMapper\CustomerToCustomerCSTypeConverter .cs">
+      <Generator></Generator>
+    </Compile>
+  </ItemGroup>
+
 </Project>

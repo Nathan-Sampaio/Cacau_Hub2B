@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Dominio.Entidade.AutoMapper
 {
-    public class PaymentToPaymentCS : IValueResolver<Payment, PaymentCS, PaymentCS>
+    public class PaymentToPaymentCSTypeConverter : ITypeConverter<Payment, PaymentCS>
     {
-        public PaymentCS Resolve(Payment source, PaymentCS destination, PaymentCS member, ResolutionContext context)
+        public PaymentCS Convert(Payment source, PaymentCS destination, ResolutionContext context)
         {
             return new PaymentCS()
             {

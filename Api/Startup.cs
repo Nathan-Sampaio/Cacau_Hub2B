@@ -1,3 +1,5 @@
+using AutoMapper;
+using Dominio.Entidade.AutoMapper;
 using Dominio.Entidade.Configuracoes;
 using Dominio.Interface.Repositorios;
 using Dominio.Interface.Servico;
@@ -39,6 +41,15 @@ namespace Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
             });
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile<PedidoProfile>();
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
 
             //Settings
             services.Configure<HubConfig>(options => Configuration.GetSection("HubConfig").Bind(options));

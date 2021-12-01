@@ -12,10 +12,10 @@ namespace Dominio.Entidade.AutoMapper
     {
         public PedidoProfile()
         {
-            CreateMap<Customer, CustomerCS>();
-            CreateMap<Shipping, DeliveryCS>();
-            CreateMap<Payment, PaymentCS>();
-            CreateMap<Pedido.Pedido, PedidoCS>();
+            CreateMap<Customer, CustomerCS>().ConvertUsing<CustomerToCustomerCSTypeConverter>();
+            CreateMap<Shipping, DeliveryCS>().ConvertUsing<ShippingToDeliveryTypeConverter>();
+            CreateMap<Payment, PaymentCS>().ConvertUsing<PaymentToPaymentCSTypeConverter>();
+            CreateMap<Pedido.Pedido, PedidoCS>().ConvertUsing<PedidoToPedidoCSTypeConverter>();
         }
     }
 }
