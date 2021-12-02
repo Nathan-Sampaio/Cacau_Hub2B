@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Dominio.Entidade
+namespace Dominio.Entidade.Pedido
 {
     public class Customer
     {

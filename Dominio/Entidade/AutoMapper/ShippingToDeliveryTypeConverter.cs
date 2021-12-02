@@ -14,10 +14,11 @@ namespace Dominio.Entidade.AutoMapper
         {
             return new DeliveryCS()
             {
-                method = source.Provider,
+                method = "Delivery",
                 recipient = new RecipientCS()
                 {
                     firstName = source.ReceiverName,
+                    lastName = source.ReceiverName,
                 },
                 address = new AddressCS()
                 {
@@ -27,6 +28,7 @@ namespace Dominio.Entidade.AutoMapper
                     Country = source.Address.Country,
                     PostalCode = source.Address.ZipCode,
                     StreetNumber = source.Address.Number,
+                    Neighborhood = source.Address.Neighborhood
                 },
                 expectedDate = source.EstimatedDeliveryDate
             };

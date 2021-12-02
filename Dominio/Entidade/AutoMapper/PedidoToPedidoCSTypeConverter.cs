@@ -14,7 +14,7 @@ namespace Dominio.Entidade.AutoMapper
         {
             return new PedidoCS()
             {
-               customer = source.Customer,
+               deliveryFee = source.Shipping.Price,
             };
         }
     }

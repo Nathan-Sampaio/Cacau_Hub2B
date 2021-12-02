@@ -14,8 +14,8 @@ namespace Dominio.Entidade.AutoMapper
         {
             CreateMap<Customer, CustomerCS>().ConvertUsing<CustomerToCustomerCSTypeConverter>();
             CreateMap<Shipping, DeliveryCS>().ConvertUsing<ShippingToDeliveryTypeConverter>();
-            CreateMap<Payment, PaymentCS>().ConvertUsing<PaymentToPaymentCSTypeConverter>();
-            CreateMap<Pedido.Pedido, PedidoCS>().ConvertUsing<PedidoToPedidoCSTypeConverter>();
+            //CreateMap<Payment, PaymentCS>().ConvertUsing<PaymentToPaymentCSTypeConverter>();
+            CreateMap<Pedido.Pedido, PedidoCS>();
         }
     }
 }

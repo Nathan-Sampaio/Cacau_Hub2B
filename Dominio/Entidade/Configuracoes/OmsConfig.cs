@@ -14,6 +14,8 @@ namespace Dominio.Entidade.Configuracoes
 
         public string LoginUrl { get; set; }
 
+        public string OrderUrl { get; set; }
+
         public OmsAuthRequest Autenticacao { get; set; }
     }
 }

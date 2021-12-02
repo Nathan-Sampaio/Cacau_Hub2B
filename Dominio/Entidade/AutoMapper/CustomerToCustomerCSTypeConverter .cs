@@ -16,6 +16,7 @@ namespace Dominio.Entidade.AutoMapper
 			return new CustomerCS()
 			{
 				document = source.DocumentNumber,
+				documentType = ObterTipoDocumento(source.DocumentNumber),
 				firstName = ObterPrimeiroNome(source.Name),
 				lastName = ObterUltimoNome(source.Name),
 				phoneNumber = source.Telephone,
@@ -33,6 +34,18 @@ namespace Dominio.Entidade.AutoMapper
 		{
 			var resultadoRegex = Regex.Split(name, @"/(?<=^[^ ]+) /");
 			return resultadoRegex[resultadoRegex.Length - 1];
+		}
+
+		private string ObterTipoDocumento(string documento)
+        {
+			if (Regex.IsMatch(documento, @"(^(\d{2}.\d{3}.\d{3}/\d{4}-\d{2})|(\d{14})$)"))
+			{
+				return "CNPJ";
+			}
+			else
+			{
+				return "CPF";
+			}
 		}
 	}
 }

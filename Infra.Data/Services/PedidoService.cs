@@ -18,12 +18,15 @@ namespace Infra.Data.Services
     public class PedidoService : IPedidoServico
     {
         private readonly HubConfig config;
+        private readonly OmsConfig _configOms;
         private readonly ILoginService _loginService;
 
-        public PedidoService(IOptions<HubConfig> configuration, ILoginService loginService)
+        public PedidoService(IOptions<HubConfig> configuration, ILoginService loginService,
+            IOptions<OmsConfig> configOms)
         {
-            this.config = configuration.Value;
+            config = configuration.Value;
             _loginService = loginService;
+            _configOms = configOms.Value;
         }
 
         public async Task<PedidosResponse> BuscarPedidosHub(FiltroPedido filtro)
@@ -104,6 +107,42 @@ namespace Infra.Data.Services
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public async Task EnviarPedidoParaOms(PedidoCS pedido)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    client.DefaultRequestHeaders.Authorization =
+                       new AuthenticationHeaderValue("Bearer", await _loginService.RecuperarTokenAcessoOms());
+
+                    var postUrl = _configOms.BaseUrl + _configOms.OrderUrl;
+                    var requestContent = new StringContent(JsonSerializer.Serialize(pedido), Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PostAsync(postUrl, requestContent);
+
+                    response.EnsureSuccessStatusCode();
+                    string conteudo =
+                        await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                    var settings = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                    };
+
+                }
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

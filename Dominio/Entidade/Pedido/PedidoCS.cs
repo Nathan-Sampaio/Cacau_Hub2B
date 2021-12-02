@@ -16,8 +16,8 @@ namespace Dominio.Entidade.Pedido
         public string status { get; set; }
         public double merchantKmAwayHaversine { get; set; }
         public double merchantKmAwayRoute { get; set; }
-        public Customer customer { get; set; }
-        public DeliveryCS delivery { get; set; }
+        public CustomerCS Customer { get; set; }
+        public DeliveryCS Delivery { get; set; }
         public List<ItemCS> items { get; set; }
         public double deliveryFee { get; set; }
         public double discount { get; set; }
@@ -26,7 +26,7 @@ namespace Dominio.Entidade.Pedido
         public double tax { get; set; }
         public string notes { get; set; }
         public string paymentStatus { get; set; }
-        public List<PaymentCS> payments { get; set; }
+        public List<PaymentCS> Payments { get; set; }
         public string elapsedTimeSinceLastStatusChange { get; set; }
         public string elapsedTimeSinceIntegration { get; set; }
         public string elapsedTimeBetweenStatusChange { get; set; }
@@ -36,5 +36,9 @@ namespace Dominio.Entidade.Pedido
         public List<string> campaigns { get; set; }
         public bool isGift { get; set; }
         public bool isReseller { get; set; }
+        public string Payload { get; set; }
+        public string Client { get; set; }
+
+        public ClientDetails ClientDetails { get; set; }
     }
 }

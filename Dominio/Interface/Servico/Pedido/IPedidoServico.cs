@@ -10,5 +10,6 @@ namespace Dominio.Interface.Servico.Pedido
     {
         Task<PedidosResponse> BuscarPedidosHub(FiltroPedido filtro);
         Task<Entidade.Pedido.Pedido> BuscarPedidosHubPorOrderId(int orderId);
+        Task EnviarPedidoParaOms(PedidoCS pedido);
     }
 }

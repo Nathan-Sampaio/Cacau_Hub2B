@@ -1,22 +1,20 @@
 ﻿using AutoMapper;
 using Dominio.Entidade.Pedido;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dominio.Entidade.AutoMapper
 {
-    public class PaymentToPaymentCSTypeConverter : ITypeConverter<Payment, PaymentCS>
+    public class PaymentToPaymentCSTypeConverter : ITypeConverter<Payment, List<PaymentCS>>
     {
-        public PaymentCS Convert(Payment source, PaymentCS destination, ResolutionContext context)
+        public List<PaymentCS> Convert(Payment source, List<PaymentCS> destination, ResolutionContext context)
         {
-            return new PaymentCS()
+            return new List<PaymentCS>()
             {
-                method = source.Method,
-                amount = source.TotalAmountPlusShipping,
-                installments = source.Installments,
+                new PaymentCS(){
+                    method = "CreditCard",
+                    amount = source.TotalAmountPlusShipping,
+                    installments = source.Installments,
+                }
             };
         }
     }
