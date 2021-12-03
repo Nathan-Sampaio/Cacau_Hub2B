@@ -20,9 +20,26 @@ namespace Api.Controllers
         [HttpPost("ReceberPedidosIntegracaoHub")]
         public async Task<IActionResult> ReceberPedidosIntegracaoHub(Webhook webHook)
         {
-            await _integracaoService.IntegrarPedido(webHook.IdOrder);
+            try
+            {
+                if (webHook.IdTenant != 2032)
+                {
+                    return BadRequest("Requisição inválida");
+                }
 
-            return Ok();
+                if (webHook.IdOrder == 0 && webHook.IdTenant == 2032 && webHook.OrderStatus == "canceled")
+                {
+                    return Ok();
+                }
+
+                await _integracaoService.IntegrarPedido(webHook);
+
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
         }
     }
 }

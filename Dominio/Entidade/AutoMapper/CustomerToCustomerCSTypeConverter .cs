@@ -20,7 +20,7 @@ namespace Dominio.Entidade.AutoMapper
 				firstName = ObterPrimeiroNome(source.Name),
 				lastName = ObterUltimoNome(source.Name),
 				phoneNumber = source.Telephone,
-				mobileNumber = source.MobileNumber,
+				mobileNumber = string.IsNullOrEmpty(source.MobileNumber) ? source.Telephone : source.MobileNumber,
 				emailAddress = source.Email
 			};
 		}
