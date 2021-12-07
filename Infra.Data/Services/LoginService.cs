@@ -59,9 +59,9 @@ namespace Infra.Data.Services
                     return resultado.access_token;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message);
             }
         }
 
