@@ -68,7 +68,7 @@ namespace TestProject
 
             _loginService = new LoginService(hub, new RedisRepositorio(redis), oms);
 
-            _pedidoService = new PedidoService(hub, _loginService);
+            _pedidoService = new PedidoService(hub, _loginService, oms);
         }
 
         [TestMethod]

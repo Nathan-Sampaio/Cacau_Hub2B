@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dominio.Entidade.Pedido;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Dominio.Interface.Servico
 {
     public interface IIntegracaoService
     {
-        Task IntegrarPedido(int pedido);
+        Task IntegrarPedido(Webhook pedido);
     }
 }
