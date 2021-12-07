@@ -5,7 +5,9 @@ using Dominio.Entidade.Configuracoes;
 using Dominio.Entidade.Pedido;
 using Dominio.Interface.Repositorios;
 using Dominio.Interface.Servico;
+using Dominio.Interface.Servico.Nf_e;
 using Dominio.Interface.Servico.Pedido;
+using Dominio.Interface.Servico.Tracking;
 using Infra.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -81,6 +83,8 @@ namespace Api
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IPedidoServico, PedidoService>();
             services.AddScoped<IIntegracaoService, IntegracaoService>();
+            services.AddScoped<INotaFiscalService, NotaFiscalService>();
+            services.AddScoped<ITrackingService, TrackingService>();
 
         }
 
