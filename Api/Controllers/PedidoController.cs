@@ -5,18 +5,30 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// 
+    [Route("api/[controller]")]
     public class PedidoController : Controller
     {
         private readonly IIntegracaoService _integracaoService;
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="integracaoService"></param>
         public PedidoController(IIntegracaoService integracaoService)
         {
             _integracaoService = integracaoService;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
 
+       
+        /// <summary>
+        /// Endpoint para receber os dados do pedido criado na Hub
+        /// </summary>
+        /// <param name="webHook">Parametro enviado pela Hub com os dados do Pedido</param>
+        /// <returns></returns>
         [HttpPost("ReceberPedidosIntegracaoHub")]
         public async Task<IActionResult> ReceberPedidosIntegracaoHub(Webhook webHook)
         {

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
+    [Route("api/[controller]")]
     public class TrackingController : Controller
     {
         private readonly ITrackingService _trackingService;

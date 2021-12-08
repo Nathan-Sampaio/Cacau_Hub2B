@@ -40,10 +40,10 @@ namespace Infra.Data.Services
                     };
 
                     //var postUrl = _configOms.BaseUrl + _configOms.OrderUrl;
-                    var postUrl = "https://api.cacaudigital.xyz:8443/cacaushow/oms/v1/orders";
+                    var postUrl = $"https://api.cacaudigital.xyz:8443/cacaushow/oms/v1/orders/{entidade.Id}/invoice/xml";
                     var requestContent = new StringContent(string.Empty, Encoding.UTF8, "application/json");
 
-                    HttpResponseMessage response = await client.PostAsync(postUrl, requestContent);
+                    HttpResponseMessage response = await client.GetAsync(postUrl);
 
                     response.EnsureSuccessStatusCode();
                     string conteudo =
