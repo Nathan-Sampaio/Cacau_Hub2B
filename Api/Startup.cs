@@ -70,6 +70,7 @@ namespace Api
             services.AddScoped<IIntegracaoService, IntegracaoService>();
             services.AddScoped<INotaFiscalService, NotaFiscalService>();
             services.AddScoped<ITrackingService, TrackingService>();
+            services.AddScoped<IEnviaNotaFiscalHubService, EnviaNotaFiscalHubService>();
 
         }
 

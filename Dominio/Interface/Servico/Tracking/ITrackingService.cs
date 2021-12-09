@@ -1,4 +1,5 @@
-﻿using Dominio.Entidade.Tracking;
+﻿using Dominio.Entidade.StatusPedido;
+using Dominio.Entidade.Tracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace Dominio.Interface.Servico.Tracking
     public interface ITrackingService
     {
         string AdicionarTracking(TrackingCS tracking);
+        string AdicionaStatus(StatusPedidoCS statusPedidoCS);
     }
 }

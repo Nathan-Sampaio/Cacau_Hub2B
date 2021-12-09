@@ -1,4 +1,5 @@
-﻿using Dominio.Entidade.Tracking;
+﻿using Dominio.Entidade.StatusPedido;
+using Dominio.Entidade.Tracking;
 using Dominio.Interface.Servico.Nf_e;
 using Dominio.Interface.Servico.Tracking;
 using System;
@@ -18,12 +19,24 @@ namespace Infra.Data.Services
         }
         public string AdicionarTracking(TrackingCS tracking)
         {
-            if(tracking.Code == "Faturado")
+            if (tracking.Code == "Faturado")
             {
                 _notaFiscalService.BuscaXml(tracking.ShippingProvider);
             }
 
             return null;
+        }
+
+        public string AdicionaStatus(StatusPedidoCS statusPedidoCS)
+        {
+            {
+                if (statusPedidoCS.Status == "Invoice")
+                {
+                    _notaFiscalService.BuscaXml(statusPedidoCS.IdPedido);
+                }
+
+                return null;
+            }
         }
     }
 }

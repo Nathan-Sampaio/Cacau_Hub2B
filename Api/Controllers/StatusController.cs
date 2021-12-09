@@ -1,4 +1,5 @@
-﻿using Dominio.Entidade.Tracking;
+﻿using Dominio.Entidade.StatusPedido;
+using Dominio.Entidade.Tracking;
 using Dominio.Interface.Servico.Tracking;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,18 +10,18 @@ using System.Threading.Tasks;
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    public class TrackingController : Controller
+    public class StatusController : Controller
     {
         private readonly ITrackingService _trackingService;
-        public TrackingController(ITrackingService trackingService)
+        public StatusController(ITrackingService trackingService)
         {
             _trackingService = trackingService;
         }
 
         [HttpPost("RecebeRequisicaoOms")]
-        public async Task<IActionResult> RecebeRequisicaoOms(TrackingCS tracking)
+        public async Task<IActionResult> RecebeRequisicaoOms(StatusPedidoCS statusPedidoCS)
         {
-            var retorno = _trackingService.AdicionarTracking(tracking);
+            var retorno = _trackingService.AdicionaStatus(statusPedidoCS);
 
             return Ok();
         }
