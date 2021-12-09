@@ -41,7 +41,7 @@ namespace Infra.Data.Services
                     numeroPedido = numeroPedido.Replace("HB-", "");
 
                     //var postUrl = _configOms.BaseUrl + _configOms.OrderUrl;
-                    var postUrl = $"https://api.cacaudigital.xyz:8443/cacaushow/oms/v1/orders/767/invoice/xml";
+                    var postUrl = $"https://api.cacaudigital.xyz:8443/cacaushow/oms/v1/orders/{numeroPedido}/invoice/xml";
                     var requestContent = new StringContent(string.Empty, Encoding.UTF8, "application/json");
 
                     HttpResponseMessage response = await client.GetAsync(postUrl);
@@ -67,8 +67,8 @@ namespace Infra.Data.Services
                     var totalAmount = xmlDoc.GetElementsByTagName("vOrig")[0].InnerText;
                     var issueDate = xmlDoc.GetElementsByTagName("dhEmi")[0].InnerText;
 
-                    key = key.Substring(26, 47);
-
+                    key = key.Substring(29, 44);
+                    
                     var nota = new NotaFiscalCS()
                     {
                         Xml = xml.Xml,

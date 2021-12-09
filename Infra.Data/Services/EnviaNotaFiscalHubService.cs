@@ -31,7 +31,7 @@ namespace Infra.Data.Services
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
                     client.DefaultRequestHeaders.Authorization =
-                       new AuthenticationHeaderValue("Bearer", await _loginService.RecuperarTokenAcessoOms());
+                       new AuthenticationHeaderValue("Bearer", await _loginService.RecuperarTokenAcessoHub());
 
                     //var postUrl = _configOms.BaseUrl + _configOms.OrderUrl;
                     var postUrl = $"https://rest.hub2b.com.br/Orders/{numeroPedido}/Invoice";

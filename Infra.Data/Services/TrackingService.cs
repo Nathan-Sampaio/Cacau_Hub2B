@@ -30,7 +30,7 @@ namespace Infra.Data.Services
         public string AdicionaStatus(StatusPedidoCS statusPedidoCS)
         {
             {
-                if (statusPedidoCS.Status == "Invoice")
+                if (statusPedidoCS.Status == "Invoiced")
                 {
                     _notaFiscalService.BuscaXml(statusPedidoCS.IdPedido);
                 }
