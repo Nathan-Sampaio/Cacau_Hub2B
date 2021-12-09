@@ -21,7 +21,7 @@ namespace Servico
 
         public async Task IntegrarPedido(Webhook pedido)
         {
-            var pedidoRecebido = await _pedidoService.BuscarPedidosHubPorOrderId(pedido.IdOrder);
+            var pedidoRecebido = await _pedidoService.BuscarPedidosHubPorOrderId(Convert.ToInt32(pedido.IdOrder));
 
             var pedidoOms = _mapper.Map<PedidoCS>(pedidoRecebido);
 

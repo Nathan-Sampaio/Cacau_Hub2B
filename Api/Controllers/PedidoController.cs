@@ -13,7 +13,7 @@ namespace Api.Controllers
     public class PedidoController : Controller
     {
         private readonly IIntegracaoService _integracaoService;
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -23,14 +23,8 @@ namespace Api.Controllers
             _integracaoService = integracaoService;
         }
 
-       
-        /// <summary>
-        /// Endpoint para receber os dados do pedido criado na Hub
-        /// </summary>
-        /// <param name="webHook">Parametro enviado pela Hub com os dados do Pedido</param>
-        /// <returns></returns>
         [HttpPost("ReceberPedidosIntegracaoHub")]
-        public async Task<IActionResult> ReceberPedidosIntegracaoHub(Webhook webHook)
+        public async Task<IActionResult> ReceberPedidosIntegracaoHub([FromBody]Webhook webHook)
         {
             try
             {
@@ -39,12 +33,16 @@ namespace Api.Controllers
                     return BadRequest("Requisição inválida");
                 }
 
-                if (webHook.IdOrder == 0 && webHook.IdTenant == 2032 && webHook.OrderStatus == "canceled")
+                if (webHook.IdOrder == 0 && webHook.IdTenant == 2032 && webHook.OrderStatus == "Cancelled")
                 {
                     return Ok();
                 }
 
-                await _integracaoService.IntegrarPedido(webHook);
+                if (webHook.OrderStatus != "Created")
+                {
+                    await _integracaoService.IntegrarPedido(webHook);
+                }
+
 
                 return Ok();
             }
