@@ -43,7 +43,6 @@ namespace Api.Controllers
                     await _integracaoService.IntegrarPedido(webHook);
                 }
 
-
                 return Ok();
             }
             catch (System.Exception)

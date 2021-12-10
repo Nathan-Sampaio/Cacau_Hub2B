@@ -8,6 +8,10 @@ using Dominio.Interface.Servico;
 using Dominio.Interface.Servico.Nf_e;
 using Dominio.Interface.Servico.Pedido;
 using Dominio.Interface.Servico.Tracking;
+using Hangfire;
+using Hangfire.Mongo;
+using Hangfire.Mongo.Migration.Strategies;
+using Hangfire.Mongo.Migration.Strategies.Backup;
 using Infra.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -57,6 +61,26 @@ namespace Api
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+            var migrationOptions = new MongoMigrationOptions
+            {
+                MigrationStrategy = new DropMongoMigrationStrategy(),
+                BackupStrategy = new CollectionMongoBackupStrategy()
+            };
+            var storageOptions = new MongoStorageOptions
+            {
+                MigrationOptions = migrationOptions
+            };
+
+            // HangFire Configuration
+            //services.AddHangfire(config =>
+            //{
+            //    config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170);
+            //    config.UseSimpleAssemblyNameTypeSerializer();
+            //    config.UseRecommendedSerializerSettings();
+            //    config.UseMongoStorage(Configuration["MongoConfig:ConnectionString"], "HangfireMarketplace", storageOptions);
+            //});
+
+            //services.AddHangfireServer();
 
             //Settings
             services.Configure<HubConfig>(options => Configuration.GetSection("HubConfig").Bind(options));
@@ -81,6 +105,9 @@ namespace Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //HangFire Start
+            //app.UseHangfireDashboard();
 
             app.UseSwagger(c =>
             {
