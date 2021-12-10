@@ -7,6 +7,7 @@ using Dominio.Interface.Repositorios;
 using Dominio.Interface.Servico;
 using Dominio.Interface.Servico.Nf_e;
 using Dominio.Interface.Servico.Pedido;
+using Dominio.Interface.Servico.Status;
 using Dominio.Interface.Servico.Tracking;
 using Hangfire;
 using Hangfire.Mongo;
@@ -95,6 +96,7 @@ namespace Api
             services.AddScoped<INotaFiscalService, NotaFiscalService>();
             services.AddScoped<ITrackingService, TrackingService>();
             services.AddScoped<IEnviaNotaFiscalHubService, EnviaNotaFiscalHubService>();
+            services.AddScoped<IStatuService, StatusService>();
 
         }
 

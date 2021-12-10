@@ -1,6 +1,7 @@
 ﻿using Dominio.Entidade.StatusPedido;
 using Dominio.Entidade.Tracking;
 using Dominio.Interface.Servico.Nf_e;
+using Dominio.Interface.Servico.Status;
 using Dominio.Interface.Servico.Tracking;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Infra.Data.Services
     public class TrackingService : ITrackingService
     {
         private readonly INotaFiscalService _notaFiscalService;
+        private readonly IStatuService _statuService;
         public TrackingService(INotaFiscalService notaFiscalService)
         {
             _notaFiscalService = notaFiscalService;
@@ -33,6 +35,17 @@ namespace Infra.Data.Services
                 if (statusPedidoCS.Status == "Invoiced")
                 {
                     _notaFiscalService.BuscaXml(statusPedidoCS.IdPedido);
+                }
+
+                if(statusPedidoCS.Status == "Dispatched")
+                {
+                    //Pegar o dados de tracking e mandar para a Hub
+                }
+
+                else
+                {
+                    //enviar qualquer status diferentes direto no endpoint de put do status
+                    _statuService.AdicionaStatusDiferentes(statusPedidoCS);
                 }
 
                 return null;
