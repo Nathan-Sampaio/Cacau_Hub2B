@@ -6,6 +6,7 @@ using Infra.Data.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Repositorio;
+using System.Threading.Tasks;
 
 namespace TestProject
 {
@@ -54,11 +55,14 @@ namespace TestProject
                 RedisTokenKey = "AccessTokenOms",
                 BaseUrl = "https://api.cacaudigital.xyz:8443/",
                 LoginUrl = "auth/v1/jwt/token/",
+                OrderUrl = "cacaushow/oms/v1/orders",
                 Autenticacao = new OmsAuthRequest()
                 {
-                    clientid = "UwSjZbV99eZN9sVXkvaIsow20AIciQ",
-                    clientsecret = "hKDpu93dvUTJMqO83IHk9nV9vSLtFJ",
-                    userName = "testes@2032g",
+                    //clientid = "nathan.system@cacaushow.com.br",
+                    //clientsecret = "N@t$$89451340oliv",
+                    clientid = "marcos.costa@cacaushow.com.br",
+                    clientsecret = "Cshow2022",
+                    userName = "6045",
                 }
             };
 
@@ -85,6 +89,27 @@ namespace TestProject
             var pedido = _pedidoService.BuscarPedidosHubPorOrderId(807276452).Result;
 
             Assert.IsNotNull(pedido);
+        }
+
+        [TestMethod]
+        public async Task OMSEstaRetornandoPedidoAtravesDoCodigoHub()
+        {
+            var pedido = await _pedidoService.BuscarPedidoPorReferenceIdOMS("HB-811216704");
+
+            Assert.IsNotNull(pedido);
+            Assert.IsTrue(pedido != 0);
+        }
+
+        [TestMethod]
+        public async Task SolicitacaoDeCancelamentoFoiConcluida()
+        {
+            await _pedidoService.EnviarSolicitacacaoCancelamentoOMS(1967);
+        }
+
+        [TestMethod]
+        public async Task CancelamentoPedidoRealizadoOMS()
+        {
+            await _pedidoService.CancelarPedidoOMS(1967);
         }
     }
 }

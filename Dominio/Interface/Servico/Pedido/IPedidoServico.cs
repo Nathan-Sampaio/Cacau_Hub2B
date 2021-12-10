@@ -11,5 +11,8 @@ namespace Dominio.Interface.Servico.Pedido
         Task<PedidosResponse> BuscarPedidosHub(FiltroPedido filtro);
         Task<Entidade.Pedido.Pedido> BuscarPedidosHubPorOrderId(int orderId);
         Task EnviarPedidoParaOms(PedidoCS pedido);
+        Task<int> BuscarPedidoPorReferenceIdOMS(string referenceId);
+        Task EnviarSolicitacacaoCancelamentoOMS(int IdPedido);
+        Task CancelarPedidoOMS(int IdPedido);
     }
 }

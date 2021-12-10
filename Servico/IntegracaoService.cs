@@ -37,7 +37,11 @@ namespace Servico
 
             if (pedido.OrderStatus == "Cancelled")
             {
+                var numeroPedido = await _pedidoService.BuscarPedidoPorReferenceIdOMS(pedido.IdOrder.ToString());
 
+                await _pedidoService.EnviarSolicitacacaoCancelamentoOMS(numeroPedido);
+
+                await _pedidoService.CancelarPedidoOMS(numeroPedido);
             }
         }
     }
