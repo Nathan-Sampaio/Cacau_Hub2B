@@ -62,26 +62,30 @@ namespace Api
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            var migrationOptions = new MongoMigrationOptions
-            {
-                MigrationStrategy = new DropMongoMigrationStrategy(),
-                BackupStrategy = new CollectionMongoBackupStrategy()
-            };
-            var storageOptions = new MongoStorageOptions
-            {
-                MigrationOptions = migrationOptions
-            };
+            #region HangFire
 
-            // HangFire Configuration
-            //services.AddHangfire(config =>
+
+            //var migrationOptions = new MongoMigrationOptions
             //{
-            //    config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170);
-            //    config.UseSimpleAssemblyNameTypeSerializer();
-            //    config.UseRecommendedSerializerSettings();
-            //    config.UseMongoStorage(Configuration["MongoConfig:ConnectionString"], "HangfireMarketplace", storageOptions);
-            //});
+            //    MigrationStrategy = new MigrateMongoMigrationStrategy(),
+            //    BackupStrategy = new CollectionMongoBackupStrategy()
+            //};
+            //var storageOptions = new MongoStorageOptions
+            //{
+            //    MigrationOptions = migrationOptions
+            //};
+
+            //// HangFire Configuration
+            //services.AddHangfire(configuration => configuration
+            //    .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+            //    .UseSimpleAssemblyNameTypeSerializer()
+            //    .UseRecommendedSerializerSettings()
+            //    .UseMongoStorage(Configuration["MongoConfig:ConnectionString"], "HangfireMarketplace", storageOptions)
+            //);
 
             //services.AddHangfireServer();
+
+            #endregion
 
             //Settings
             services.Configure<HubConfig>(options => Configuration.GetSection("HubConfig").Bind(options));
@@ -101,7 +105,7 @@ namespace Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IBackgroundJobClient backgroundJobs, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -110,6 +114,7 @@ namespace Api
 
             //HangFire Start
             //app.UseHangfireDashboard();
+            //backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
 
             app.UseSwagger(c =>
             {
@@ -132,6 +137,7 @@ namespace Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHangfireDashboard();
             });
         }
     }

@@ -14,7 +14,7 @@ namespace Dominio.Entidade.AutoMapper
         {
             CreateMap<Entidade.Pedido.Pedido, PedidoCS>()
                      //.ForMember(dest => dest.status, act => act.MapFrom(src => "Placed"))
-                     .ForMember(dest => dest.merchantRef, act => act.MapFrom(src => "9009"))
+                     .ForMember(dest => dest.merchantRef, act => act.MapFrom(src => "6045"))
                      .ForPath(dest => dest.Delivery.recipient.phoneNumber, act => act.MapFrom(src => src.Customer.Telephone))
                      .ForPath(dest => dest.Delivery.recipient.emailAddress, act => act.MapFrom(src => src.Customer.Email))
                      .ForPath(dest => dest.Delivery.recipient.mobileNumber, act => act.MapFrom(src => src.Customer.Telephone))

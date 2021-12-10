@@ -21,16 +21,24 @@ namespace Servico
 
         public async Task IntegrarPedido(Webhook pedido)
         {
-            var pedidoRecebido = await _pedidoService.BuscarPedidosHubPorOrderId(Convert.ToInt32(pedido.IdOrder));
+            if (pedido.OrderStatus == "Approved")
+            {
+                var pedidoRecebido = await _pedidoService.BuscarPedidosHubPorOrderId(Convert.ToInt32(pedido.IdOrder));
 
-            var pedidoOms = _mapper.Map<PedidoCS>(pedidoRecebido);
+                var pedidoOms = _mapper.Map<PedidoCS>(pedidoRecebido);
 
-            pedidoOms.status = "Placed";
-            pedidoOms.orderRef = $"HB-{ pedidoRecebido.Reference.Id.ToString()}";
-            pedidoOms.Payload = JsonSerializer.Serialize(pedidoRecebido);
-            pedidoOms.creation = DateTime.Now;
+                pedidoOms.status = "Placed";
+                pedidoOms.orderRef = $"HB-{ pedidoRecebido.Reference.Id.ToString()}";
+                pedidoOms.Payload = JsonSerializer.Serialize(pedidoRecebido);
+                pedidoOms.creation = DateTime.Now;
 
-            await _pedidoService.EnviarPedidoParaOms(pedidoOms);
+                await _pedidoService.EnviarPedidoParaOms(pedidoOms);
+            }
+
+            if (pedido.OrderStatus == "Cancelled")
+            {
+
+            }
         }
     }
 }
