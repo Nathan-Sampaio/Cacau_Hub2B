@@ -32,12 +32,12 @@ namespace Infra.Data.Services
         public string AdicionaStatus(StatusPedidoCS statusPedidoCS)
         {
             {
-                if (statusPedidoCS.Status == "Invoiced")
+                if (statusPedidoCS.Status.ToLower() == "invoiced")
                 {
                     _notaFiscalService.BuscaXml(statusPedidoCS.IdPedido);
                 }
 
-                if(statusPedidoCS.Status == "Dispatched")
+                else if(statusPedidoCS.Status == "Dispatched")
                 {
                     //Pegar o dados de tracking e mandar para a Hub
                 }

@@ -41,7 +41,7 @@ namespace Servico
 
                 await _pedidoService.EnviarSolicitacacaoCancelamentoOMS(numeroPedido);
 
-                await _pedidoService.CancelarPedidoOMS(numeroPedido);
+                //await _pedidoService.CancelarPedidoOMS(numeroPedido);
             }
         }
     }
