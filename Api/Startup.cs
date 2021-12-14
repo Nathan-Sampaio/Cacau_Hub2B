@@ -24,9 +24,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Repositorio;
+using Serilog;
 using Servico;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -106,8 +108,10 @@ namespace Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddFile($"{env.ContentRootPath}\\Logs\\api-marketplace-{DateTime.Now.ToString("dd-MM-yyyy")}.txt");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

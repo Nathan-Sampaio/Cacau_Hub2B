@@ -19,6 +19,12 @@ namespace Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureLogging(logging =>
+                {
+                    logging.ClearProviders();
+                    logging.AddConsole();
+                    //logging.AddFile($"Logs/api-marketplace-{DateTime.Now.ToString("dd-MM-yyyy")}");
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseKestrel();

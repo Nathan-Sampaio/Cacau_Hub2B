@@ -213,15 +213,6 @@ namespace Infra.Data.Services
                     HttpResponseMessage response = await client.PatchAsync(patchUrl, requestContent);
 
                     response.EnsureSuccessStatusCode();
-
-                    //string conteudo =
-                    //    await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-                    //var settings = new JsonSerializerOptions
-                    //{
-                    //    PropertyNameCaseInsensitive = true,
-                    //};
-
                 }
             }
             catch (Exception)
