@@ -29,12 +29,12 @@ namespace Infra.Data.Services
             return null;
         }
 
-        public string AdicionaStatus(StatusPedidoCS statusPedidoCS)
+        public async Task<string> AdicionaStatusAsync(StatusPedidoCS statusPedidoCS)
         {
             {
                 if (statusPedidoCS.Status.ToLower() == "invoiced")
                 {
-                    _notaFiscalService.BuscaXml(statusPedidoCS.IdPedido);
+                    await _notaFiscalService.BuscaXml(statusPedidoCS.IdPedido);
                 }
 
                 else if(statusPedidoCS.Status == "Dispatched")
@@ -45,7 +45,7 @@ namespace Infra.Data.Services
                 else
                 {
                     //enviar qualquer status diferentes direto no endpoint de put do status
-                    _statuService.AdicionaStatusDiferentes(statusPedidoCS);
+                    await _statuService.AdicionaStatusDiferentes(statusPedidoCS);
                 }
 
                 return null;

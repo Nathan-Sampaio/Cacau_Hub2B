@@ -82,7 +82,7 @@ namespace Infra.Data.Services
                         Packages = "1"
                     };
 
-                    var enviaNota = _enviaNotaFiscalHubService.EnviaNotaHub(nota, numeroPedido);
+                    var enviaNota = await _enviaNotaFiscalHubService.EnviaNotaHub(nota, numeroPedido);
 
                     return xml.Xml;
                 }

@@ -21,7 +21,7 @@ namespace Api.Controllers
         [HttpPost("RecebeRequisicaoOms")]
         public async Task<IActionResult> RecebeRequisicaoOms([FromBody]StatusPedidoCS statusPedidoCS)
         {
-            var retorno = _trackingService.AdicionaStatus(statusPedidoCS);
+            var retorno = await _trackingService.AdicionaStatusAsync(statusPedidoCS);
 
             return Ok();
         }
