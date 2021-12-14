@@ -30,8 +30,8 @@ namespace Infra.Data.Services
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    //client.DefaultRequestHeaders.Authorization =
-                    //   new AuthenticationHeaderValue("Bearer", await _loginService.RecuperarTokenAcessoOms());
+                    client.DefaultRequestHeaders.Authorization =
+                       new AuthenticationHeaderValue("Bearer", await _loginService.RecuperarTokenAcessoHub());
 
                     var statusDiferente = new StatusDiferente()
                     {
@@ -41,8 +41,10 @@ namespace Infra.Data.Services
                         Message = status.Status
                     };
 
+                    status.CodReferencia = status.CodReferencia.Replace("HB-", "");
+
                     //var postUrl = _configOms.BaseUrl + _configOms.OrderUrl;
-                    var postUrl = $"https://rest.hub2b.com.br/Orders/{status.IdPedido}/Status";
+                    var postUrl = $"https://rest.hub2b.com.br/Orders/{status.CodReferencia}/Status";
                     var requestContent = new StringContent(System.Text.Json.JsonSerializer.Serialize(status), Encoding.UTF8, "application/json");
 
                     HttpResponseMessage response = await client.PutAsync(postUrl, requestContent);
