@@ -10,5 +10,6 @@ namespace Dominio.Entidade.StatusPedido
     {
         public string Status { get; set; }
         public string IdPedido { get; set; }
+        public string CodReferencia { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace Dominio.Interface.Servico.Nf_e
     public interface INotaFiscalService
     {
         Task<string> CadastraNfe();
-        Task<string> BuscaXml(string numeroPedido);
+        Task<string> BuscaXml(string numeroPedido, string idPedido);
     }
 }

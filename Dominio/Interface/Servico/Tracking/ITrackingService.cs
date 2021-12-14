@@ -10,7 +10,6 @@ namespace Dominio.Interface.Servico.Tracking
 {
     public interface ITrackingService
     {
-        string AdicionarTracking(TrackingCS tracking);
         string AdicionaStatus(StatusPedidoCS statusPedidoCS);
     }
 }
