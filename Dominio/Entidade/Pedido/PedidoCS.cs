@@ -40,5 +40,7 @@ namespace Dominio.Entidade.Pedido
         public string Client { get; set; }
 
         public ClientDetails ClientDetails { get; set; }
+        public Invoice Invoice { get; set; }
+        public Tracking Tracking { get; set; }
     }
 }

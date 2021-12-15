@@ -73,7 +73,7 @@ namespace Infra.Data.Services
 
                     //var postUrl = _configOms.BaseUrl + _configOms.OrderUrl;
                     //COLOCAR URL DO OMS
-                    var postUrl = $"https://api.cacaudigital.xyz:8443/cacaushow/oms/v1/orders/{statusPedidoCS.IdPedido}?format=1";
+                    var postUrl = $"https://api.cacaudigital.xyz:8443/cacaushow/oms/v1/orders/{statusPedidoCS.IdPedido}";
                     var requestContent = new StringContent(string.Empty, Encoding.UTF8, "application/json");
 
                     HttpResponseMessage response = await client.GetAsync(postUrl);
@@ -89,30 +89,28 @@ namespace Infra.Data.Services
 
                     var pedido = JsonSerializer.Deserialize<PedidoCS>(conteudo, settings);
 
-                    //if(conteudo != null)
-                    //{
-                    //    var tracking = new TrackingCS()
-                    //    {
-                    //        Code = pedido.tracking.number,
-                    //        Url = pedido.tracking.url,
-                    //        ShippingDate = pedido.tracking.dateSend,
-                    //        ShippingProvider = pedido.tracking.client,
-                    //        ShippingService = pedido.tracking.client,
-                    //    }
-                    //}
-
-                    var tracking = new TrackingCS()
+                    if (conteudo != null)
                     {
-                        Code = "BR1223123", //NUMERO DO RASTREIO
-                        Url = "teste.com.br", //LINK PARA RASTREAR O PEDIDO
-                        ShippingDate = "2021-12-14 00:00:00", //DATA DO ENVIO 
-                        ShippingProvider = "Correios", //TRANSPORTADORA
-                        ShippingService = "Sedex" //MODALIDADE DO ENVIO
-                    };
+                        var tracking = new TrackingCS()
+                        {
+                            Code = pedido.Tracking.Number,
+                            Url = pedido.Tracking.Url,
+                            ShippingDate = pedido.Tracking.DateSend,
+                            ShippingProvider = pedido.Tracking.Client,
+                            ShippingService = pedido.Tracking.Client,
+                        };
 
-                    
+                        EnviaTracking(tracking, statusPedidoCS.CodReferencia);
+                    }
 
-                    EnviaTracking(tracking, statusPedidoCS.CodReferencia);
+                    //var tracking = new TrackingCS()
+                    //{
+                    //    Code = "BR1223123", //NUMERO DO RASTREIO
+                    //    Url = "teste.com.br", //LINK PARA RASTREAR O PEDIDO
+                    //    ShippingDate = "2021-12-14 00:00:00", //DATA DO ENVIO 
+                    //    ShippingProvider = "Correios", //TRANSPORTADORA
+                    //    ShippingService = "Sedex" //MODALIDADE DO ENVIO
+                    //};
 
                     return null;
                 }
