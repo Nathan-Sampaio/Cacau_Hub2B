@@ -1,4 +1,5 @@
 ﻿using Dominio.Entidade.Configuracoes;
+using Dominio.Entidade.Pedido;
 using Dominio.Entidade.StatusPedido;
 using Dominio.Entidade.Tracking;
 using Dominio.Interface.Servico.Nf_e;
@@ -72,16 +73,33 @@ namespace Infra.Data.Services
 
                     //var postUrl = _configOms.BaseUrl + _configOms.OrderUrl;
                     //COLOCAR URL DO OMS
-                    //var postUrl = $"https://rest.hub2b.com.br/Orders/{statusPedidoCS.idPedido}/Tracking";
-                    //var requestContent = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+                    var postUrl = $"https://api.cacaudigital.xyz:8443/cacaushow/oms/v1/orders/{statusPedidoCS.IdPedido}?format=1";
+                    var requestContent = new StringContent(string.Empty, Encoding.UTF8, "application/json");
 
-                    //HttpResponseMessage response = await client.PutAsync(postUrl, requestContent);
+                    HttpResponseMessage response = await client.GetAsync(postUrl);
 
-                    //response.EnsureSuccessStatusCode();
-                    //string conteudo =
-                    //    await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    response.EnsureSuccessStatusCode();
+                    string conteudo =
+                        await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-                    //VALIDAR SE O RETORNO NÃO SERÁ NULL
+                    var settings = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                    };
+
+                    var pedido = JsonSerializer.Deserialize<PedidoCS>(conteudo, settings);
+
+                    //if(conteudo != null)
+                    //{
+                    //    var tracking = new TrackingCS()
+                    //    {
+                    //        Code = pedido.tracking.number,
+                    //        Url = pedido.tracking.url,
+                    //        ShippingDate = pedido.tracking.dateSend,
+                    //        ShippingProvider = pedido.tracking.client,
+                    //        ShippingService = pedido.tracking.client,
+                    //    }
+                    //}
 
                     var tracking = new TrackingCS()
                     {
@@ -92,10 +110,7 @@ namespace Infra.Data.Services
                         ShippingService = "Sedex" //MODALIDADE DO ENVIO
                     };
 
-                    var settings = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true,
-                    };
+                    
 
                     EnviaTracking(tracking, statusPedidoCS.CodReferencia);
 
@@ -127,24 +142,13 @@ namespace Infra.Data.Services
 
                     //var postUrl = _configOms.BaseUrl + _configOms.OrderUrl;
                     var postUrl = $"https://rest.hub2b.com.br/Orders/{codReferencia}/Tracking";
-                    var requestContent = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+                    var requestContent = new StringContent(JsonSerializer.Serialize(trackingCS), Encoding.UTF8, "application/json");
 
                     HttpResponseMessage response = await client.PostAsync(postUrl, requestContent);
 
                     response.EnsureSuccessStatusCode();
                     string conteudo =
                         await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-                    //VALIDAR SE O RETORNO NÃO SERÁ NULL
-
-                    //var tracking = new TrackingCS()
-                    //{
-                    //    Code = "BR1223123", //NUMERO DO RASTREIO
-                    //    Url = "teste.com.br", //LINK PARA RASTREAR O PEDIDO
-                    //    ShippingDate = "2021-12-14 00:00:00", //DATA DO ENVIO 
-                    //    ShippingProvider = "Correios", //TRANSPORTADORA
-                    //    ShippingService = "Sedex" //MODALIDADE DO ENVIO
-                    //};
 
                     var settings = new JsonSerializerOptions
                     {
