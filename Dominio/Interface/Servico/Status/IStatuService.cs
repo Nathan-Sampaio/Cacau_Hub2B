@@ -9,6 +9,6 @@ namespace Dominio.Interface.Servico.Status
 {
     public interface IStatuService
     {
-        Task<string> AdicionaStatusDiferentes(StatusPedidoCS status);
+        Task AdicionaStatusDiferentes(StatusPedidoCS status);
     }
 }

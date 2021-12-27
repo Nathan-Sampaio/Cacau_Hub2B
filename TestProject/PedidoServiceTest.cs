@@ -3,8 +3,10 @@ using Dominio.Entidade.Configuracoes;
 using Dominio.Entidade.Pedido;
 using Dominio.Interface.Servico.Pedido;
 using Infra.Data.Services;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using Repositorio;
 using System.Threading.Tasks;
 
@@ -18,6 +20,7 @@ namespace TestProject
         private readonly HubConfig config;
         private readonly RedisConfig configRedis;
         private readonly OmsConfig Omsconfig;
+        ILogger<PedidoService> logger;
         private FiltroPedido filtroPedido;
 
         public PedidoServiceTest()
@@ -65,6 +68,9 @@ namespace TestProject
                     userName = "6045",
                 }
             };
+            
+            //or use this short equivalent 
+            logger = Mock.Of<ILogger<PedidoService>>();
 
             var redis = Options.Create(configRedis);
             var hub = Options.Create(config);
@@ -72,7 +78,7 @@ namespace TestProject
 
             _loginService = new LoginService(hub, new RedisRepositorio(redis), oms);
 
-            _pedidoService = new PedidoService(hub, _loginService, oms);
+            _pedidoService = new PedidoService(hub, _loginService, oms, logger);
         }
 
         [TestMethod]

@@ -1,6 +1,8 @@
 ﻿using Dominio.Entidade.Pedido;
 using Dominio.Interface.Servico;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
@@ -13,14 +15,16 @@ namespace Api.Controllers
     public class PedidoController : Controller
     {
         private readonly IIntegracaoService _integracaoService;
+        private readonly ILogger<PedidoController> _logger;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="integracaoService"></param>
-        public PedidoController(IIntegracaoService integracaoService)
+        public PedidoController(IIntegracaoService integracaoService, ILogger<PedidoController> logger)
         {
             _integracaoService = integracaoService;
+            _logger = logger;
         }
 
         [HttpPost("ReceberPedidosIntegracaoHub")]
@@ -28,12 +32,15 @@ namespace Api.Controllers
         {
             try
             {
+                _logger.LogInformation("ReceberPedidosIntegracaoHub");
+                _logger.LogInformation("Recebida integração : ", JsonSerializer.Serialize(webHook));
+
                 if (webHook.IdTenant != 2032)
                 {
                     return BadRequest("Requisição inválida");
                 }
 
-                if (webHook.IdOrder == 0 && webHook.IdTenant == 2032 && webHook.OrderStatus == "Cancelled")
+                if (webHook.IdOrder == 0 && webHook.IdTenant == 2032 && webHook.OrderStatus.ToLower() == "cancelled" || webHook.OrderStatus.ToLower() == "canceled")
                 {
                     return Ok();
                 }
@@ -45,8 +52,9 @@ namespace Api.Controllers
 
                 return Ok();
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
+                _logger.LogError("Erro no endpoint ReceberPedidosIntegracaoHub ", ex);
                 throw;
             }
         }

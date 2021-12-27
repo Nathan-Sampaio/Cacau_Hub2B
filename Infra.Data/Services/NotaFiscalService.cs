@@ -8,9 +8,11 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
+using Dominio.Entidade.Configuracoes;
 using Dominio.Entidade.Nf_e;
 using Dominio.Interface.Servico.Nf_e;
 using Dominio.Interface.Servico.Pedido;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace Infra.Data.Services
@@ -19,12 +21,15 @@ namespace Infra.Data.Services
     {
         private readonly ILoginService _loginService;
         private readonly IEnviaNotaFiscalHubService _enviaNotaFiscalHubService;
+        private readonly OmsConfig _configOms;
         public NotaFiscalService(ILoginService loginService,
-            IEnviaNotaFiscalHubService enviaNotaFiscalHubService)
+            IEnviaNotaFiscalHubService enviaNotaFiscalHubService, IOptions<OmsConfig> omsConfig)
         {
             _loginService = loginService;
             _enviaNotaFiscalHubService = enviaNotaFiscalHubService;
+            _configOms = omsConfig.Value;
         }
+
         public async Task<string> BuscaXml(string numeroPedido, string idPedido)
         {
             try
@@ -41,7 +46,7 @@ namespace Infra.Data.Services
                     numeroPedido = numeroPedido.Replace("HB-", "");
 
                     //var postUrl = _configOms.BaseUrl + _configOms.OrderUrl;
-                    var postUrl = $"https://api.cacaudigital.xyz:8443/cacaushow/oms/v1/orders/{idPedido}/invoice/xml";
+                    var postUrl = $"{_configOms.BaseUrl}{_configOms.OrderUrl}/{idPedido}/invoice/xml";
                     var requestContent = new StringContent(string.Empty, Encoding.UTF8, "application/json");
 
                     HttpResponseMessage response = await client.GetAsync(postUrl);

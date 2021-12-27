@@ -16,11 +16,12 @@ namespace Infra.Data.Services
     public class StatusService : IStatuService
     {
         private readonly ILoginService _loginService;
+
         public StatusService(ILoginService loginService)
         {
             _loginService = loginService;
         }
-        public async Task<string> AdicionaStatusDiferentes(StatusPedidoCS status)
+        public async Task AdicionaStatusDiferentes(StatusPedidoCS status)
         {
             try
             {
@@ -57,16 +58,12 @@ namespace Infra.Data.Services
                     {
                         PropertyNameCaseInsensitive = true,
                     };
-
-                    return null;
                 }
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-
-            return null;
         }
     }
 }

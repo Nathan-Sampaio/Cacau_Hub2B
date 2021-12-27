@@ -3,6 +3,7 @@ using Dominio.Entidade.Configuracoes;
 using Dominio.Entidade.Pedido;
 using Dominio.Interface.Servico.Pedido;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -20,13 +21,16 @@ namespace Infra.Data.Services
         private readonly HubConfig config;
         private readonly OmsConfig _configOms;
         private readonly ILoginService _loginService;
+        private readonly ILogger<PedidoService> _logger;
+
 
         public PedidoService(IOptions<HubConfig> configuration, ILoginService loginService,
-            IOptions<OmsConfig> configOms)
+            IOptions<OmsConfig> configOms, ILogger<PedidoService> logger)
         {
             config = configuration.Value;
             _loginService = loginService;
             _configOms = configOms.Value;
+            _logger = logger;
         }
 
         public async Task<PedidosResponse> BuscarPedidosHub(FiltroPedido filtro)
@@ -70,8 +74,9 @@ namespace Infra.Data.Services
                     return JsonSerializer.Deserialize<PedidosResponse>(conteudo, settings);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError("Erro no método PedidoService.BuscarPedidosHub: " + ex.InnerException);
                 throw;
             }
         }
@@ -105,8 +110,9 @@ namespace Infra.Data.Services
                     return JsonSerializer.Deserialize<Pedido>(conteudo, settings);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError("Erro no método PedidoService.BuscarPedidosHubPorOrderId: " + ex.InnerException);
                 throw;
             }
         }
@@ -140,8 +146,9 @@ namespace Infra.Data.Services
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError("Erro no método PedidoService.EnviarPedidoParaOms: " + ex.InnerException);
 
                 throw;
             }

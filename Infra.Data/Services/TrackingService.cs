@@ -6,10 +6,9 @@ using Dominio.Interface.Servico.Nf_e;
 using Dominio.Interface.Servico.Pedido;
 using Dominio.Interface.Servico.Status;
 using Dominio.Interface.Servico.Tracking;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -24,39 +23,56 @@ namespace Infra.Data.Services
         private readonly IStatuService _statuService;
         private readonly ILoginService _loginService;
         private readonly StatusConfig _statusConfig;
+        private readonly OmsConfig _configOms;
+        private readonly ILogger<TrackingService> _logger;
+
         public TrackingService(INotaFiscalService notaFiscalService, IStatuService statuService, ILoginService loginService,
-            IOptions<StatusConfig> statusConfig)
+            IOptions<StatusConfig> statusConfig, IOptions<OmsConfig> omsConfig, ILogger<TrackingService> logger)
         {
             _notaFiscalService = notaFiscalService;
             _statuService = statuService;
             _loginService = loginService;
             _statusConfig = statusConfig.Value;
+            _configOms = omsConfig.Value;
+            _logger = logger;
         }
 
-        public string AdicionaStatus(StatusPedidoCS statusPedidoCS)
+        public async Task AdicionaStatus(StatusPedidoCS statusPedidoCS)
         {
+            try
             {
+                _logger.LogInformation($"AdicionaStatus: {JsonSerializer.Serialize(statusPedidoCS)}");
+
                 if (statusPedidoCS.Status.ToLower() == _statusConfig.StatusNota)
                 {
-                    _notaFiscalService.BuscaXml(statusPedidoCS.CodReferencia, statusPedidoCS.IdPedido);
+                    _logger.LogInformation($"BuscaXml");
+
+                   await _notaFiscalService.BuscaXml(statusPedidoCS.CodReferencia, statusPedidoCS.IdPedido);
                 }
 
-                else if(statusPedidoCS.Status.ToLower() == _statusConfig.StatusTracking)
+                else if (statusPedidoCS.Status.ToLower() == _statusConfig.StatusTracking)
                 {
+                    _logger.LogInformation($"BuscaTracking");
+
                     //Pegar o dados de tracking e mandar para a Hub
-                    BuscaTracking(statusPedidoCS);
+                    await BuscaTracking(statusPedidoCS);
                 }
 
                 else
                 {
-                    _statuService.AdicionaStatusDiferentes(statusPedidoCS);
-                }
+                    _logger.LogInformation($"AdicionaStatusDiferentes");
 
-                return null;
+                    await _statuService.AdicionaStatusDiferentes(statusPedidoCS);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Ocorreu um erro no TrackingService.AdicionaStatus:  {ex.Message}");
+                throw;
             }
         }
 
-        public async Task<string> BuscaTracking(StatusPedidoCS statusPedidoCS)
+        public async Task BuscaTracking(StatusPedidoCS statusPedidoCS)
         {
             try
             {
@@ -73,7 +89,7 @@ namespace Infra.Data.Services
 
                     //var postUrl = _configOms.BaseUrl + _configOms.OrderUrl;
                     //COLOCAR URL DO OMS
-                    var postUrl = $"https://api.cacaudigital.xyz:8443/cacaushow/oms/v1/orders/{statusPedidoCS.IdPedido}";
+                    var postUrl = $"{_configOms.BaseUrl}{_configOms.OrderUrl}/{statusPedidoCS.IdPedido}";
                     var requestContent = new StringContent(string.Empty, Encoding.UTF8, "application/json");
 
                     HttpResponseMessage response = await client.GetAsync(postUrl);
@@ -100,30 +116,19 @@ namespace Infra.Data.Services
                             ShippingService = pedido.Tracking.Client,
                         };
 
-                        EnviaTracking(tracking, statusPedidoCS.CodReferencia);
+                        await EnviaTracking(tracking, statusPedidoCS.CodReferencia);
                     }
-
-                    //var tracking = new TrackingCS()
-                    //{
-                    //    Code = "BR1223123", //NUMERO DO RASTREIO
-                    //    Url = "teste.com.br", //LINK PARA RASTREAR O PEDIDO
-                    //    ShippingDate = "2021-12-14 00:00:00", //DATA DO ENVIO 
-                    //    ShippingProvider = "Correios", //TRANSPORTADORA
-                    //    ShippingService = "Sedex" //MODALIDADE DO ENVIO
-                    //};
-
-                    return null;
                 }
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Ocorreu um erro no TrackingService.BuscaTracking:  {ex.Message}");
+
                 throw new Exception(ex.Message);
             }
-
-            return null;
         }
 
-        public async Task<string> EnviaTracking(TrackingCS trackingCS, string codReferencia)
+        public async Task EnviaTracking(TrackingCS trackingCS, string codReferencia)
         {
             try
             {
@@ -152,16 +157,14 @@ namespace Infra.Data.Services
                     {
                         PropertyNameCaseInsensitive = true,
                     };
-
-                    return null;
                 }
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Ocorreu um erro no TrackingService.EnviaTracking:  {ex.Message}");
+
                 throw new Exception(ex.Message);
             }
-
-            return null;
         }
     }
 }
