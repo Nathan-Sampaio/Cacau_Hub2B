@@ -14,6 +14,8 @@ namespace Dominio.Entidade.Configuracoes
         public string LoginURL { get; set; }
         public string Pedido_BuscarURL { get; set; }
 
+        public int IdTenant { get; set; }
+
         public OAuthRequest Autenticacao { get; set; }
     }
 }

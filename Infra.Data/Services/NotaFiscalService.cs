@@ -40,8 +40,8 @@ namespace Infra.Data.Services
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    //client.DefaultRequestHeaders.Authorization =
-                    //   new AuthenticationHeaderValue("Bearer", await _loginService.RecuperarTokenAcessoOms());
+                    client.DefaultRequestHeaders.Authorization =
+                       new AuthenticationHeaderValue("Bearer", await _loginService.RecuperarTokenAcessoOms());
 
                     numeroPedido = numeroPedido.Replace("HB-", "");
 
